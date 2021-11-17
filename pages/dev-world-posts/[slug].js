@@ -1,15 +1,51 @@
-import { sanityClient, PortableText, serializers } from "../../sanity";
+import { sanityClient, PortableText } from "../../sanity";
 import Image from "../../components/Image";
 
 const pageQuery = `*[_type == "page" && slug.current == $slug][0]{
     pageTitle,
     slug,
     id,
-    pageIntroduction,
+    pageIntroduction[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "slug": @.reference->slug
+        }
+      }
+    },
     mainImage,
     captionedImages,
-    extraInformation
+    extraInformation[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "slug": @.reference->slug
+        }
+      }
+    },
   }`;
+
+const serializers = {
+  marks: {
+    internalLink: ({ mark, children }) => {
+      const { slug = {} } = mark;
+      const href = `/${slug.current}`;
+      return <a href={href}>{children}</a>;
+    },
+    link: ({ mark, children }) => {
+      const { blank, href } = mark;
+      return blank ? (
+        <a href={href} target="_blank" rel="noreferrer">
+          {children}
+        </a>
+      ) : (
+        <a href={href}>{children}</a>
+      );
+    },
+  },
+};
 
 const devWorldPost = ({ data }) => {
   const { devWorldPosts } = data;
