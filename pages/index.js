@@ -7,10 +7,12 @@ import { urlFor } from "../sanity";
 
 const Home = ({ devWorldPosts }) => {
   const devWorldPostsZero = devWorldPosts[0];
+  console.log("devWorldPostsZero: ", devWorldPostsZero);
 
   const devWorldPostsFiltered = devWorldPosts.filter((item) => {
     return item.id !== 0;
   });
+  console.log("devWorldPostsFiltered: ", devWorldPostsFiltered);
 
   return (
     <main className={styles.main}>

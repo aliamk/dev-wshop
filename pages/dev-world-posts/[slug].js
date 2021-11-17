@@ -8,13 +8,12 @@ const pageQuery = `*[_type == "page" && slug.current == $slug][0]{
     pageIntroduction,
     mainImage,
     captionedImages,
-    imageGallery,
     extraInformation
   }`;
 
 const devWorldPost = ({ data }) => {
   const { devWorldPosts } = data;
-
+  console.log("slug pages: ", devWorldPosts);
   return (
     <>
       <div className="main_container">
@@ -23,19 +22,15 @@ const devWorldPost = ({ data }) => {
           <PortableText
             blocks={devWorldPosts.pageIntroduction}
             className="intro"
+            serializers={serializers}
           />
-          {/* <Image
-            identifier="main-image"
-            image={devWorldPosts.mainImage}
-            alt=""
-          /> */}
         </div>
         {devWorldPosts.captionedImages && (
           <div className="guide_images">
             {devWorldPosts.captionedImages.map(
               ({ _key, asset, topCaption }, image) => (
                 <div key={_key} className="guide_image">
-                  <PortableText blocks={topCaption} />
+                  <PortableText blocks={topCaption} serializers={serializers} />
                   <Image key={_key} identifier="image" image={asset} alt="" />
                 </div>
               )
@@ -47,9 +42,9 @@ const devWorldPost = ({ data }) => {
           className="extraInformation"
           serializers={serializers}
         />
-        {devWorldPosts.imageGallery && (
+        {/* {devWorldPosts.imageGallery && (
           <div className="image_gallery_container"></div>
-        )}
+        )} */}
       </div>
     </>
   );
