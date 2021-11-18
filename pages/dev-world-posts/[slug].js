@@ -53,11 +53,15 @@ const devWorldPost = ({ data }) => {
             )}
           </div>
         )}
-        <PortableText
-          blocks={devWorldPosts.extraInformation}
-          className="extraInformation"
-          serializers={serializers}
-        />
+        {devWorldPosts.extraInformation ? (
+          <PortableText
+            blocks={devWorldPosts.extraInformation}
+            className="extraInformation"
+            serializers={serializers}
+          />
+        ) : (
+          ""
+        )}
         {/* {devWorldPosts.imageGallery && (
           <div className="image_gallery_container"></div>
         )} */}
