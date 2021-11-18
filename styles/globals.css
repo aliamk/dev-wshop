@@ -212,7 +212,21 @@ a {
   }
 
   .extraInformation {
-    line-height: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .extraInformation h2 {
+    text-align: center;
+  }
+
+  .extraInformation h3 {
+    text-align: justify;
+    padding-bottom: 2rem;
+    line-height: 1.75rem;
+    max-width: 800px;
   }
 
   .footer {
