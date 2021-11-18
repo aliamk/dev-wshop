@@ -135,11 +135,12 @@ a {
   object-fit: cover;
   margin-bottom: 4rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 }
 
 .guide_image h3 {
   max-width: 100%;
+  line-height: 1.75rem;
 }
 
 .image img {
@@ -206,6 +207,10 @@ a {
     border-radius: 5px;
   }
 
+  .guide_image {
+    align-items: center;
+  }
+
   .extraInformation {
     line-height: 1rem;
   }
@@ -235,17 +240,30 @@ a {
     justify-content: flex-start;
   }
 
-  .guide_image {
+  .guide_image:nth-child(odd) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .guide_image:nth-child(even) {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
   }
 
-  .image {
+  .image:nth-child(odd) {
     text-align: right;
-    max-width: 50%;
-    padding-left: 2rem;
+    max-width: 600px;
+    min-width: 480px;
+    padding-left: 1rem;
+  }
+
+  .image:nth-child(even) {
+    text-align: left;
+    max-width: 600px;
+    min-width: 480px;
+    padding-right: 1rem;
   }
 }
 
@@ -273,10 +291,10 @@ a {
     max-width: 1440px;
     /* height: 1000px; */
   }
-
+  /* 
   .main_image_container h2 {
     text-align: center;
-  }
+  } */
 
   .main-image img {
     height: 100%;

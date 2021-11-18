@@ -1,4 +1,4 @@
-import { sanityClient, PortableText } from "../../sanity";
+import { sanityClient, PortableText, serializers } from "../../sanity";
 import Image from "../../components/Image";
 
 const pageQuery = `*[_type == "page" && slug.current == $slug][0]{
@@ -27,26 +27,6 @@ const pageQuery = `*[_type == "page" && slug.current == $slug][0]{
     },
   }`;
 
-const serializers = {
-  marks: {
-    internalLink: ({ mark, children }) => {
-      const { slug = {} } = mark;
-      const href = `/${slug.current}`;
-      return <a href={href}>{children}</a>;
-    },
-    link: ({ mark, children }) => {
-      const { blank, href } = mark;
-      return blank ? (
-        <a href={href} target="_blank" rel="noreferrer">
-          {children}
-        </a>
-      ) : (
-        <a href={href}>{children}</a>
-      );
-    },
-  },
-};
-
 const devWorldPost = ({ data }) => {
   const { devWorldPosts } = data;
   console.log("slug pages: ", devWorldPosts);
@@ -64,7 +44,7 @@ const devWorldPost = ({ data }) => {
         {devWorldPosts.captionedImages && (
           <div className="guide_images">
             {devWorldPosts.captionedImages.map(
-              ({ _key, asset, topCaption }, image) => (
+              ({ _key, asset, topCaption }) => (
                 <div key={_key} className="guide_image">
                   <PortableText blocks={topCaption} serializers={serializers} />
                   <Image key={_key} identifier="image" image={asset} alt="" />
