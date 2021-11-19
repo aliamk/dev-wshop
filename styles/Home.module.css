@@ -29,8 +29,7 @@
 
 .main_image {
   border-radius: 5px;
-  object-fit: cover;
-  height: 200px;
+  height: auto;
   width: 100%;
 }
 
