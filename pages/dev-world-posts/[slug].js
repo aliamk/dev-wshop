@@ -13,10 +13,21 @@ const pageQuery = `*[_type == "page" && slug.current == $slug][0]{
             "slug": @.reference->slug,
           }
         }
-      
     },
     mainImage,
-    captionedImages,
+    captionedImages[]{
+        ...,
+        topCaption[]{
+          ...,
+          markDefs[]{
+            ...,
+            _type == "internalLink" => {
+              "slug": @.reference->slug,
+            }
+          }
+        },
+
+    },
     extraInformation[]{
         ...,
         markDefs[]{
@@ -92,3 +103,5 @@ export async function getStaticProps({ params }) {
 }
 
 export default devWorldPost;
+
+[];
