@@ -33,17 +33,17 @@ const devWorldPost = ({ data }) => {
   return (
     <>
       <div className="main_container">
-        <h1>{devWorldPosts?.pageTitle}</h1>
+        <h1>{devWorldPosts.pageTitle}</h1>
         <div className="main_image_container">
           <PortableText
-            blocks={devWorldPosts?.pageIntroduction}
+            blocks={devWorldPosts.pageIntroduction}
             className="intro"
             serializers={serializers}
           />
         </div>
-        {devWorldPosts?.captionedImages && (
+        {devWorldPosts.captionedImages && (
           <div className="guide_images">
-            {devWorldPosts?.captionedImages.map(
+            {devWorldPosts.captionedImages.map(
               ({ _key, asset, topCaption }) => (
                 <div key={_key} className="guide_image">
                   <PortableText blocks={topCaption} serializers={serializers} />
