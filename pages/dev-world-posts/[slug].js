@@ -6,32 +6,25 @@ const pageQuery = `*[_type == "page" && slug.current == $slug][0]{
     slug,
     id,
     pageIntroduction[]{
-      ...,
-      body[]{
         ...,
         markDefs[]{
           ...,
           _type == "internalLink" => {
             "slug": @.reference->slug,
-            "type": @.reference->_type,
           }
         }
-      }
+      
     },
     mainImage,
     captionedImages,
     extraInformation[]{
-      ...,
-      body[]{
         ...,
         markDefs[]{
           ...,
           _type == "internalLink" => {
             "slug": @.reference->slug,
-            "type": @.reference->_type,
           }
         }
-      }
     },
   }`;
 
