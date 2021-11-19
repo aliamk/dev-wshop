@@ -46,7 +46,7 @@ export const serializers = {
   marks: {
     internalLink: ({ mark, children }) => {
       const { slug = {} } = mark;
-      const href = `poo/${slug.current}`;
+      const href = `/${slug.current}`;
       return <a href={href}>{children}</a>;
     },
     link: ({ mark, children }) => {
