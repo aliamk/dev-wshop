@@ -7,10 +7,14 @@ const pageQuery = `*[_type == "page" && slug.current == $slug][0]{
     id,
     pageIntroduction[]{
       ...,
-      markDefs[]{
+      body[]{
         ...,
-        _type == "internalLink" => {
-          "slug": @.reference->slug
+        markDefs[]{
+          ...,
+          _type == "internalLink" => {
+            "slug": @.reference->slug,
+            "type": @.reference->_type,
+          }
         }
       }
     },
@@ -18,10 +22,14 @@ const pageQuery = `*[_type == "page" && slug.current == $slug][0]{
     captionedImages,
     extraInformation[]{
       ...,
-      markDefs[]{
+      body[]{
         ...,
-        _type == "internalLink" => {
-          "slug": @.reference->slug
+        markDefs[]{
+          ...,
+          _type == "internalLink" => {
+            "slug": @.reference->slug,
+            "type": @.reference->_type,
+          }
         }
       }
     },
