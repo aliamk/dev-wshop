@@ -99,7 +99,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
   const devWorldPosts = await sanityClient.fetch(pageQuery, { slug });
-  return { props: { data: { devWorldPosts }, preview: true } };
+  return { props: { data: { devWorldPosts }, revalidate: 10 } };
 }
 
 export default devWorldPost;
