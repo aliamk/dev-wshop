@@ -98,6 +98,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
+  console.log(slug);
   const devWorldPosts = await sanityClient.fetch(pageQuery, { slug });
   return {
     props: {

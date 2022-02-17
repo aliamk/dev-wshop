@@ -1,25 +1,23 @@
-import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { sanityClient, PortableText, serializers } from "../sanity";
 import { urlFor } from "../sanity";
 
 const Home = ({ devWorldPosts }) => {
+  // Add the homepage title and description at top of page
   const devWorldPostsZero = devWorldPosts[0];
-  console.log("devWorldPostsZero: ", devWorldPostsZero);
 
+  // Add the dynamic posts (any schema property that isn't at index 0)
   const devWorldPostsFiltered = devWorldPosts.filter((item) => {
     return item.id !== 0;
   });
-  console.log("devWorldPostsFiltered: ", devWorldPostsFiltered);
 
   return (
     <main className={styles.main}>
       <div className={styles.page_introduction}>
         <h1 className={styles.title}>
           {devWorldPostsZero.pageTitle}
-          <a href="https://nextjs.org"></a>
+          {/* <a href="https://nextjs.org"></a> */}
         </h1>
         <PortableText
           key={devWorldPostsZero._id}
@@ -39,7 +37,7 @@ const Home = ({ devWorldPosts }) => {
                   </h3>
                   <img
                     className={styles.main_image}
-                    src={urlFor(devWorldPost.mainImage)}
+                    src={urlFor(devWorldPost.mainImage).width(400).fit("clip")}
                   />
                 </div>
               </Link>
